@@ -1,0 +1,15 @@
+include README.md
+include LICENSE
+include CHANGELOG.md
+include CONTRIBUTING.md
+include ARCHITECTURE.md
+include MATH.md
+include MODULES_COMPLETE.md
+recursive-include kokao *.py
+recursive-include tests *.py
+recursive-include examples *.py
+recursive-include benchmarks *.py
+prune tests/__pycache__
+prune examples/__pycache__
+prune benchmarks/__pycache__
+prune kokao/__pycache__

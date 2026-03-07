@@ -1,0 +1,84 @@
+[build-system]
+requires = ["setuptools>=61.0", "wheel"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "kokao-engine"
+version = "2.5.0"
+description = "Intuitive System based on Kosyakov's Theory: Two-Channel Core (S⁺/S⁻), Cognitive Modules, Analytical Inverse Problem, Physical Interpretation / Интуитивная система по теории Косякова: Двухканальное ядро (S⁺/S⁻), когнитивные модули, аналитическая обратная задача, физическая интерпретация"
+readme = "README.md"
+license = {text = "Apache-2.0"}
+authors = [
+    {name = "Vital Kalinouski / Виталий Калиновский", email = "newmathphys@gmail.com"},
+    {name = "V. Ovseychik / В. Овсейчик", email = "newmathphys@gmail.com"}
+]
+maintainers = [
+    {name = "newmathphys", email = "newmathphys@gmail.com"}
+]
+classifiers = [
+    "Development Status :: 4 - Beta",
+    "Intended Audience :: Developers",
+    "Intended Audience :: Science/Research",
+    "License :: OSI Approved :: Apache Software License",
+    "Programming Language :: Python :: 3",
+    "Programming Language :: Python :: 3.9",
+    "Programming Language :: Python :: 3.10",
+    "Programming Language :: Python :: 3.11",
+    "Programming Language :: Python :: 3.12",
+    "Topic :: Scientific/Engineering :: Artificial Intelligence",
+]
+keywords = ["intuitive system", "kosyakov", "neural networks", "inverse problem", "pytorch", "cognitive architecture"]
+dependencies = [
+    "torch>=2.1",
+    "pydantic>=2.0",
+    "typer>=0.12",
+]
+
+[project.optional-dependencies]
+# Основные расширения
+rag = ["faiss-cpu"]
+xai = ["shap", "lime"]
+langchain = ["langchain"]
+huggingface = ["huggingface-hub"]
+quantum = ["qiskit"]
+gnn = ["torch-geometric"]
+snn = ["snntorch"]
+homomorphic = ["tenseal"]
+mlflow = ["mlflow"]
+# Для разработки
+dev = [
+    "pytest>=7.4",
+    "pytest-cov",
+    "black",
+    "flake8",
+    "mypy",
+    "pre-commit",
+]
+# Полная установка
+all = [
+    "kokao-engine[rag,xai,langchain,huggingface,quantum,gnn,snn,homomorphic,mlflow,dev]"
+]
+
+[project.urls]
+Homepage = "https://github.com/newmathphys/kokao-engine"
+Repository = "https://github.com/newmathphys/kokao-engine.git"
+Documentation = "https://kokao-engine.readthedocs.io"
+Changelog = "https://github.com/newmathphys/kokao-engine/blob/main/CHANGELOG.md"
+
+[project.scripts]
+kokao = "kokao.cli:app"
+
+[tool.setuptools.packages.find]
+where = ["."]
+include = ["kokao*"]
+exclude = ["tests*", "examples*", "docs*", "benchmarks*", "scripts*"]
+
+[tool.pytest.ini_options]
+markers = [
+    "slow: медленные тесты",
+    "benchmark: тесты производительности",
+    "integration: интеграционные тесты",
+    "gpu: тесты требующие GPU",
+    "requires_package: тесты требующие опциональную зависимость",
+    "experimental: экспериментальные тесты (deselect with '-m \"not experimental\"')",
+]
